@@ -1,6 +1,9 @@
 <resources>
     <string name="app_name">Demo App</string>
     <string name="back"> Back </string>
-    <string name="backDescription"> There is nothing here plz go back. </string>
+    <string name="play_game"> Play Game</string>
     <color name="appBackgroundColor"> #f2f2f2 </color>
+    <string name="white_button_description"> White: </string>
+    <string name="black_button_description"> Black: </string>
+    <string name="CPU_difficulty_text"> CPU Difficulty: </string>
 </resources>

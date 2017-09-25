@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:id="@+id/homeScreen"
     android:layout_height="match_parent"
     tools:context="io.github.wenzla.testapp.MainActivity">
 
@@ -31,7 +32,7 @@
         android:layout_marginBottom="124dp"
         android:layout_marginEnd="136dp"
         android:layout_marginStart="136dp"
-        android:onClick="button2Click"
+        android:onClick="openSetup"
         android:text="Next ->"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
