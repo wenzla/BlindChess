@@ -7,35 +7,47 @@
     android:layout_height="match_parent"
     tools:context="io.github.wenzla.testapp.MainActivity">
 
+    <android.support.constraint.Guideline
+        android:id="@+id/vertical_center_guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.61" />
+
+    <android.support.constraint.Guideline
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/horizontal_button_top_guideline"
+        app:layout_constraintGuide_percent="0.6"
+        android:orientation="horizontal"
+        tools:layout_editor_absoluteY="340dp"
+        tools:layout_editor_absoluteX="0dp"/>
+
+    <android.support.constraint.Guideline
+        android:id="@+id/horizontal_text_top_guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.16" />
+
     <ImageButton
         android:id="@+id/imageButton"
         android:layout_width="77dp"
         android:layout_height="69dp"
-        android:onClick="openSetup"
+        android:layout_marginEnd="4dp"
         android:background="@android:color/darker_gray"
-        app:srcCompat="@android:drawable/ic_media_play"
-        tools:layout_editor_absoluteX="142dp"
-        tools:layout_editor_absoluteY="124dp"
-        android:layout_marginBottom="146dp"
-        app:layout_constraintBottom_toTopOf="@+id/button2"
-        android:layout_marginEnd="141dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="124dp"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginStart="142dp" />
+        android:onClick="openSetup"
+        app:layout_constraintEnd_toStartOf="@+id/vertical_center_guideline"
+        app:layout_constraintTop_toTopOf="@+id/horizontal_text_top_guideline"
+        app:srcCompat="@android:drawable/ic_media_play" />
 
     <Button
         android:id="@+id/button2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="124dp"
-        android:layout_marginEnd="136dp"
-        android:layout_marginStart="136dp"
-        android:onClick="openSetup"
+        android:onClick="openGPS"
         android:text="Next ->"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintEnd_toStartOf="@+id/vertical_center_guideline"
+        app:layout_constraintTop_toTopOf="@+id/horizontal_button_top_guideline" />
 
 </android.support.constraint.ConstraintLayout>

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Demo App</string>
+    <string name="app_name">Blind Chess</string>
     <string name="back"> Back </string>
     <string name="play_game"> Play Game</string>
     <color name="appBackgroundColor"> #f2f2f2 </color>

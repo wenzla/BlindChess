@@ -13,9 +13,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.5"
-        tools:layout_editor_absoluteY="0dp"
-        tools:layout_editor_absoluteX="192dp"/>
+        app:layout_constraintGuide_percent="0.15" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/vertical_other_guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.85" />
 
     <android.support.constraint.Guideline
         android:layout_width="wrap_content"
@@ -31,10 +36,9 @@
         android:layout_width="75dp"
         android:layout_height="76dp"
         android:layout_marginBottom="212dp"
-        android:layout_marginStart="80dp"
         android:text="Player 1"
         app:layout_constraintBottom_toTopOf="@+id/horizontal_button_top_guideline"
-        app:layout_constraintStart_toStartOf="@+id/vertical_center_guideline"
+        app:layout_constraintEnd_toStartOf="@+id/vertical_other_guideline"
         app:srcCompat="@android:color/background_light" />
 
     <Button
@@ -42,28 +46,28 @@
         android:layout_width="76dp"
         android:layout_height="76dp"
         android:layout_marginBottom="112dp"
-        android:layout_marginStart="80dp"
         android:text="Player 2"
         app:layout_constraintBottom_toTopOf="@+id/horizontal_button_top_guideline"
-        app:layout_constraintStart_toStartOf="@+id/vertical_center_guideline"
+        app:layout_constraintEnd_toStartOf="@+id/vertical_other_guideline"
         app:srcCompat="@android:color/background_dark" />
 
     <SeekBar
         android:id="@+id/seekBar2"
         android:layout_width="283dp"
         android:layout_height="21dp"
-        android:layout_marginEnd="48dp"
-        android:layout_marginTop="12dp"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        app:layout_constraintEnd_toStartOf="@+id/vertical_other_guideline"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/vertical_center_guideline"
         app:layout_constraintTop_toTopOf="@+id/horizontal_button_top_guideline" />
 
     <Button
         android:id="@+id/imageButton4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="48dp"
         android:layout_marginTop="88dp"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/vertical_other_guideline"
         app:layout_constraintTop_toTopOf="@+id/horizontal_button_top_guideline"
         app:srcCompat="@android:drawable/ic_media_play" />
 
@@ -71,46 +75,45 @@
         android:id="@+id/textView2"
         android:layout_width="106dp"
         android:layout_height="36dp"
-        android:layout_marginBottom="228dp"
-        android:layout_marginEnd="68dp"
+        android:layout_marginBottom="224dp"
+        android:layout_marginStart="8dp"
         android:text="@string/white_button_description"
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/horizontal_button_top_guideline"
-        app:layout_constraintEnd_toStartOf="@+id/vertical_center_guideline" />
+        app:layout_constraintStart_toStartOf="@+id/vertical_center_guideline" />
 
     <TextView
         android:id="@+id/textView3"
         android:layout_width="106dp"
         android:layout_height="41dp"
         android:layout_marginBottom="124dp"
-        android:layout_marginEnd="60dp"
+        android:layout_marginStart="8dp"
         android:text="@string/black_button_description"
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/horizontal_button_top_guideline"
-        app:layout_constraintEnd_toStartOf="@+id/vertical_center_guideline"
-        app:layout_constraintHorizontal_chainStyle="spread_inside" />
+        app:layout_constraintStart_toStartOf="@+id/vertical_center_guideline" />
 
     <TextView
         android:id="@+id/DifficultyTextView"
         android:layout_width="wrap_content"
         android:layout_height="28dp"
-        android:layout_marginBottom="24dp"
-        android:layout_marginEnd="68dp"
+        android:layout_marginBottom="20dp"
+        android:layout_marginStart="8dp"
         android:text="@string/CPU_difficulty_text"
         app:layout_constraintBottom_toTopOf="@+id/horizontal_button_top_guideline"
-        app:layout_constraintEnd_toStartOf="@+id/vertical_center_guideline" />
+        app:layout_constraintStart_toStartOf="@+id/vertical_center_guideline" />
 
     <TextView
         android:id="@+id/textView5"
         android:layout_width="wrap_content"
         android:layout_height="48dp"
-        android:layout_marginEnd="44dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="88dp"
         android:text="@string/play_game"
         android:textSize="24sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toStartOf="@+id/vertical_center_guideline"
+        app:layout_constraintStart_toStartOf="@+id/vertical_center_guideline"
         app:layout_constraintTop_toTopOf="@+id/horizontal_button_top_guideline" />
 </android.support.constraint.ConstraintLayout>

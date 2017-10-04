@@ -15,6 +15,7 @@ import android.transition.Scene;
 import android.transition.Transition;
 import android.transition.TransitionInflater;
 import android.transition.TransitionManager;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
@@ -28,8 +29,39 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.home_screen);
     }
 
-    // this is bad
+    @Override
+    public void onStart() {
+        super.onStart();
+        setContentView(R.layout.home_screen);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        setContentView(R.layout.home_screen);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+    }
+
+    // TODO: this is bad practice so fix it
     public void openSetup(View v) {
+
+        Intent i=new Intent(
+                MainActivity.this,
+                SetupGame.class);
+        startActivity(i);
+
+    }
+    // TODO: this is bad practice so fix it
+    public void openGPS(View v) {
 
         Intent i=new Intent(
                 MainActivity.this,
