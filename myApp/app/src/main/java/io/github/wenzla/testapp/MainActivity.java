@@ -22,33 +22,39 @@ import android.widget.ImageButton;
 
 // also some of my layout element names are ass
 public class MainActivity extends AppCompatActivity {
+    private static final String TAG = "Main Activity";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home_screen);
+        Log.d(TAG, "OnCreate");
     }
 
     @Override
     public void onStart() {
         super.onStart();
         setContentView(R.layout.home_screen);
+        Log.d(TAG, "OnStart");
     }
 
     @Override
     public void onResume() {
         super.onResume();
         setContentView(R.layout.home_screen);
+        Log.d(TAG, "OnResume");
     }
 
     @Override
     public void onStop() {
         super.onStop();
+        Log.d(TAG, "OnStop");
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
+        Log.d(TAG, "OnDestroy");
     }
 
     // TODO: this is bad practice so fix it
