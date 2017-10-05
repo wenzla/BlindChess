@@ -20,6 +20,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".SetupGame" />
+        <activity android:name=".gpsTest" />
     </application>
 
 </manifest>

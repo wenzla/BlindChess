@@ -7,27 +7,44 @@
     android:layout_height="match_parent"
     tools:context="io.github.wenzla.testapp.gpsTest">
 
+    <android.support.constraint.Guideline
+        android:id="@+id/guidlinegpstestvertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.09" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guidlinegpstesthorizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.25" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guidelinegpstesthorizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.71" />
+
     <Button
         android:id="@+id/GPSButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="124dp"
-        android:layout_marginEnd="136dp"
-        android:layout_marginStart="136dp"
+        android:layout_marginStart="52dp"
         android:onClick="GetCoordinates"
         android:text="Find Coordinates"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="@+id/guidlinegpstestvertical"
+        app:layout_constraintTop_toTopOf="@+id/guidelinegpstesthorizontal" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/locationString"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
-        android:layout_marginEnd="144dp"
-        android:layout_marginTop="112dp"
+        android:layout_marginBottom="32dp"
         android:text="Your Location:"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintBottom_toTopOf="@+id/guidlinegpstesthorizontal"
+        app:layout_constraintStart_toStartOf="@+id/guidlinegpstestvertical" />
 
 </android.support.constraint.ConstraintLayout>

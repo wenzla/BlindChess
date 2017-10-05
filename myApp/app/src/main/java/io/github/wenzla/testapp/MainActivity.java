@@ -65,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
 
         Intent i=new Intent(
                 MainActivity.this,
-                SetupGame.class);
+                gpsTest.class);
         startActivity(i);
 
     }
