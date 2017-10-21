@@ -18,7 +18,10 @@ import android.transition.TransitionManager;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageButton;
+
+import java.util.Set;
 
 // also some of my layout element names are ass
 public class MainActivity extends AppCompatActivity {
@@ -28,7 +31,28 @@ public class MainActivity extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home_screen);
+        Button gpsButton = (Button) findViewById(R.id.GPSButtonS);
+        ImageButton setupButton = (ImageButton) findViewById(R.id.GameSetupButton);
+        // Idk y but these onClickListeners don't work
+        gpsButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, gpsTest.class));
+            }
+        });
+        setupButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, SetupGame.class));
+            }
+        });
         Log.d(TAG, "OnCreate");
+    }
+
+    public void SetupClick(View v) {
+        startActivity(new Intent(MainActivity.this, SetupGame.class));
+    }
+
+    public void GPSClick(View v) {
+        startActivity(new Intent(MainActivity.this, gpsTest.class));
     }
 
     @Override
@@ -57,23 +81,5 @@ public class MainActivity extends AppCompatActivity {
         Log.d(TAG, "OnDestroy");
     }
 
-    // TODO: this is bad practice so fix it
-    public void openSetup(View v) {
-
-        Intent i=new Intent(
-                MainActivity.this,
-                SetupGame.class);
-        startActivity(i);
-
-    }
-    // TODO: this is bad practice so fix it
-    public void openGPS(View v) {
-
-        Intent i=new Intent(
-                MainActivity.this,
-                gpsTest.class);
-        startActivity(i);
-
-    }
 
 }

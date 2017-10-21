@@ -30,21 +30,44 @@
 
     <Button
         android:id="@+id/GPSButton"
-        android:layout_width="wrap_content"
+        android:layout_width="182dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="52dp"
+        android:layout_marginStart="72dp"
         android:onClick="GetCoordinates"
         android:text="Find Coordinates"
         app:layout_constraintStart_toStartOf="@+id/guidlinegpstestvertical"
         app:layout_constraintTop_toTopOf="@+id/guidelinegpstesthorizontal" />
 
+    <com.facebook.login.widget.LoginButton
+        android:id="@+id/login_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginStart="72dp"
+        android:layout_marginTop="12dp"
+        app:layout_constraintStart_toStartOf="@+id/guidlinegpstestvertical"
+        app:layout_constraintTop_toBottomOf="@+id/GPSButton" />
+
     <TextView
         android:id="@+id/locationString"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
-        android:layout_marginBottom="32dp"
+        android:layout_marginBottom="36dp"
+        android:layout_marginStart="8dp"
         android:text="Your Location:"
         app:layout_constraintBottom_toTopOf="@+id/guidlinegpstesthorizontal"
         app:layout_constraintStart_toStartOf="@+id/guidlinegpstestvertical" />
+
+    <TextView
+        android:id="@+id/fbString"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="108dp"
+        android:text="Your FB status:"
+        app:layout_constraintStart_toStartOf="@+id/guidlinegpstestvertical"
+        app:layout_constraintTop_toTopOf="@+id/guidlinegpstesthorizontal" />
 
 </android.support.constraint.ConstraintLayout>

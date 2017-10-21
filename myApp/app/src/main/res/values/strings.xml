@@ -9,4 +9,7 @@
     <string name="resume"> Resume </string>
     <string name="pause"> Pause </string>
     <string name="logtag">onCreate</string>
+    <string name="facebook_app_id">156261791633621</string>
+    <string name="fb_login_protocol_scheme">fb156261791633621</string>
+
 </resources>

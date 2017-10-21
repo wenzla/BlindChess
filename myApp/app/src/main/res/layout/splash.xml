@@ -1,0 +1,26 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/fb_login_fragment"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.facebook.login.widget.LoginButton
+        android:id="@+id/login_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginStart="105dp"
+        android:layout_marginTop="73dp" />
+
+    <TextView
+        android:id="@+id/fbText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/login_button"
+        android:layout_below="@+id/login_button"
+        android:layout_marginEnd="59dp"
+        android:layout_marginTop="78dp"
+        android:text="" />
+
+</RelativeLayout>

@@ -17,6 +17,13 @@ import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
+import com.facebook.CallbackManager;
+import com.facebook.FacebookCallback;
+import com.facebook.FacebookException;
+import com.facebook.FacebookSdk;
+import com.facebook.login.LoginResult;
+import com.facebook.login.widget.LoginButton;
+
 import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
@@ -28,12 +35,40 @@ public class gpsTest extends AppCompatActivity implements LocationListener{
     String provider;
     private Location gpsLocation;
     private static final String TAG = "Gps Test";
+    private CallbackManager callbackManager;
+    private TextView info;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        callbackManager = CallbackManager.Factory.create();
+
         setContentView(R.layout.gps_test);
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+
+        info = findViewById(R.id.fbString);
+        LoginButton loginButton = findViewById(R.id.login_button);
+        loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
+            @Override
+            public void onSuccess(LoginResult loginResult) {
+                String s = "User ID:  " +
+                        loginResult.getAccessToken().getUserId() + "\n" +
+                        "Auth Token: " + loginResult.getAccessToken().getToken();
+                info.setText(s);
+            }
+
+            @Override
+            public void onCancel() {
+                String s = "Login attempt cancelled.";
+                info.setText(s);
+            }
+
+            @Override
+            public void onError(FacebookException e) {
+                String s = "Login attempt failed.";
+                info.setText(s);
+            }
+        });
 
         provider = locationManager.getBestProvider(new Criteria(), false);
 
@@ -43,6 +78,11 @@ public class gpsTest extends AppCompatActivity implements LocationListener{
         }
         gpsLocation = locationManager.getLastKnownLocation(provider);
 
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        callbackManager.onActivityResult(requestCode, resultCode, data);
     }
 
 

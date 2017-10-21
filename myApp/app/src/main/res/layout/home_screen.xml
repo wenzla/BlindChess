@@ -31,21 +31,21 @@
         app:layout_constraintGuide_percent="0.16" />
 
     <ImageButton
-        android:id="@+id/imageButton"
+        android:id="@+id/GameSetupButton"
         android:layout_width="77dp"
         android:layout_height="69dp"
         android:layout_marginEnd="4dp"
         android:background="@android:color/darker_gray"
-        android:onClick="openSetup"
+        android:onClick="SetupClick"
         app:layout_constraintEnd_toStartOf="@+id/vertical_center_guideline"
         app:layout_constraintTop_toTopOf="@+id/horizontal_text_top_guideline"
         app:srcCompat="@android:drawable/ic_media_play" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/GPSButtonS"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:onClick="openGPS"
+        android:onClick="GPSClick"
         android:text="Next ->"
         app:layout_constraintEnd_toStartOf="@+id/vertical_center_guideline"
         app:layout_constraintTop_toTopOf="@+id/horizontal_button_top_guideline" />
