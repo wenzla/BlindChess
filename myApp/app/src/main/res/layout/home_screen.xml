@@ -8,46 +8,66 @@
     tools:context="io.github.wenzla.testapp.MainActivity">
 
     <android.support.constraint.Guideline
-        android:id="@+id/vertical_center_guideline"
+        android:id="@+id/string_guideline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.61" />
+        app:layout_constraintGuide_percent="0.26" />
 
     <android.support.constraint.Guideline
+        android:id="@+id/fb_guideline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.72" />
+
+    <android.support.constraint.Guideline
         android:id="@+id/horizontal_button_top_guideline"
-        app:layout_constraintGuide_percent="0.6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:orientation="horizontal"
-        tools:layout_editor_absoluteY="340dp"
-        tools:layout_editor_absoluteX="0dp"/>
+        app:layout_constraintGuide_percent="0.85" />
 
     <android.support.constraint.Guideline
         android:id="@+id/horizontal_text_top_guideline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.16" />
+        app:layout_constraintGuide_percent="0.18" />
 
     <ImageButton
         android:id="@+id/GameSetupButton"
-        android:layout_width="77dp"
+        android:layout_width="173dp"
         android:layout_height="69dp"
-        android:layout_marginEnd="4dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginStart="8dp"
         android:background="@android:color/darker_gray"
         android:onClick="SetupClick"
-        app:layout_constraintEnd_toStartOf="@+id/vertical_center_guideline"
-        app:layout_constraintTop_toTopOf="@+id/horizontal_text_top_guideline"
+        app:layout_constraintBottom_toTopOf="@+id/horizontal_button_top_guideline"
+        app:layout_constraintEnd_toStartOf="@+id/fb_guideline"
+        app:layout_constraintStart_toStartOf="@+id/string_guideline"
         app:srcCompat="@android:drawable/ic_media_play" />
 
-    <Button
-        android:id="@+id/GPSButtonS"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="GPSClick"
-        android:text="Next ->"
-        app:layout_constraintEnd_toStartOf="@+id/vertical_center_guideline"
+    <com.facebook.login.widget.LoginButton
+        android:id="@+id/login_button"
+        android:layout_width="173dp"
+        android:layout_height="25dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toStartOf="@+id/fb_guideline"
+        app:layout_constraintStart_toStartOf="@+id/string_guideline"
         app:layout_constraintTop_toTopOf="@+id/horizontal_button_top_guideline" />
+
+    <TextView
+        android:id="@+id/locationString"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginStart="16dp"
+        android:text="@string/WelcomeMessage"
+        app:layout_constraintBottom_toTopOf="@+id/horizontal_text_top_guideline"
+        app:layout_constraintStart_toStartOf="@+id/string_guideline" />
 
 </android.support.constraint.ConstraintLayout>
