@@ -156,6 +156,10 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
         startActivity(new Intent(MainActivity.this, MultiplayerGame.class));
     }
 
+    public void sessionTest(View v) {
+        startActivity(new Intent(MainActivity.this, SessionActivity.class));
+    }
+
     @Override
     public void onStart() {
         super.onStart();
@@ -287,6 +291,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
     }
 
     public void setFBName(String name) {
+        SessionHandler.setData(name,AccessToken.getCurrentAccessToken().getUserId());
         info = findViewById(R.id.locationString);
         FBName = name;
         String newString = (String)info.getText();
