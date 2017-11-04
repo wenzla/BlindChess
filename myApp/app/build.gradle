@@ -28,5 +28,4 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
     compile 'com.facebook.android:facebook-android-sdk:[4,5)'
 
-
 }

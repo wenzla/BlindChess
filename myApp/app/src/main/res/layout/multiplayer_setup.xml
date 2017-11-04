@@ -1,35 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/gameSetupScreen"
-    android:background="@color/appBackgroundColor"
-    tools:context="io.github.wenzla.testapp.MainActivity">
+    android:background="#FFFFFF"
+    android:orientation="vertical" >
 
-    <android.support.constraint.Guideline
-        android:id="@+id/multiplayer_vertical_guideline"
+    <io.github.wenzla.testapp.CanvasView
+        android:id="@+id/signature_canvas"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:textColor="#FFFFFF" />
+
+    <TextView
+        android:id="@+id/status"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.69" />
-
-    <android.support.constraint.Guideline
-        android:id="@+id/multiplayer_horizontal_guideline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.74" />
+        android:text="TextView" />
 
     <Button
-        android:id="@+id/FindPlayer"
-        android:text="@string/findGameString"
-        android:layout_width="138dp"
-        android:layout_height="76dp"
-        android:layout_marginTop="4dp"
-        app:layout_constraintEnd_toStartOf="@+id/multiplayer_vertical_guideline"
-        app:layout_constraintTop_toTopOf="@+id/multiplayer_horizontal_guideline"
-        app:srcCompat="@android:drawable/ic_media_play" />
+        android:id="@+id/resetBoard"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center"
+        android:onClick="clearCanvas"
+        android:text="Reset Board" />
 
-</android.support.constraint.ConstraintLayout>
+</FrameLayout>
