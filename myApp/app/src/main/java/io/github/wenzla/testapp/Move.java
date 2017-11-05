@@ -1,12 +1,7 @@
 package io.github.wenzla.testapp;
 
-/**
- * Represents a move as two Locations and the piece that is moved
- *
- * @author James Taylor <jamestay@vt.edu>
- * @author Evan Teitelman <para@vt.edu>
- * @version 2014.12.03
- */
+// Represents a move as two Locations and the piece that is moved
+
 public class Move
 {
 

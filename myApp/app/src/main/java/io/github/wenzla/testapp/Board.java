@@ -6,22 +6,13 @@ import java.util.EmptyStackException;
 import java.util.Stack;
 import java.util.LinkedList;
 
-// -------------------------------------------------------------------------
-/**
- * Defines the board and board functions.
- * @author James Taylor <jamestay@vt.edu>
- * @author Skylar Edwards <skyed@vt.edu>
- * @version 2014.12.03
- */
 public class Board
 {
     private LinkedList<Piece> pieces = new LinkedList<Piece>();
-    private Stack<Move>       moves  = new Stack<Move>();
+    public Stack<Move>       moves  = new Stack<Move>();
 
     private int               turn;
 
-
-    // ----------------------------------------------------------
     /**
      * Creates a new board object.
      */
@@ -30,8 +21,6 @@ public class Board
         addPieces();
     }
 
-
-    // ----------------------------------------------------------
     /**
      * Adds pieces to the board at default locations.
      */
@@ -74,14 +63,6 @@ public class Board
         pieces.add(new Piece("BLACK_PAWN", new Location(7, 1), Color.BLACK));
     }
 
-
-    // ----------------------------------------------------------
-    /**
-     * Called by the boardView when the user interacts with the screen.
-     * @param target the target piece to move
-     * @param from the initial location of the piece to move
-     * @param to the final location
-     */
     public void move(Piece target, Location from, Location to)
     {
 

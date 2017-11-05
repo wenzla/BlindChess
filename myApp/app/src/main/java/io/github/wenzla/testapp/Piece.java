@@ -4,7 +4,6 @@ import android.graphics.Paint;
 
 /**
  * Contains data about a piece.
- *
  */
 public class Piece
 {

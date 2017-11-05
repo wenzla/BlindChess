@@ -16,10 +16,7 @@ import android.widget.TextView;
 
 import org.w3c.dom.Text;
 
-/**
- * Created by Allen on 11/4/2017.
- */
-
+// This is just the view to display the chessboard
 public class CanvasView extends View {
     Bitmap mBitmap;
     private Canvas mCanvas;
@@ -36,6 +33,8 @@ public class CanvasView extends View {
     boolean willMove = false;
     String statusString;
     TextView tv = (TextView) findViewById(R.id.status);
+    char[] chessNotationX = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'};
+    char[] chessNotationY = {'8', '7', '6', '5', '4', '3', '2', '1'};
 
     CanvasViewListener canvasViewListener;
 
@@ -106,11 +105,16 @@ public class CanvasView extends View {
         for (Piece piece : b.getPieces())
         {
             String x = piece.getSymbol() + "";
-            canvas.drawText(x, ((piece.getLocation().rank() + 1) *100) + 50, ((piece.getLocation().file() + 1)) *100 + 50, piece.getPaint());
+            if(b.getTurns()%2 == 0){
+                if(piece.color == Color.WHITE){
+                    canvas.drawText(x, ((piece.getLocation().rank() + 1) *100) + 50, ((piece.getLocation().file() + 1)) *100 + 50, piece.getPaint());
+                }
+            } else {
+                if(piece.color == Color.BLACK){
+                    canvas.drawText(x, ((piece.getLocation().rank() + 1) *100) + 50, ((piece.getLocation().file() + 1)) *100 + 50, piece.getPaint());
+                }
+            }
         }
-
-        // draw the mPath with the mPaint on the canvas when onDraw
-        canvas.drawPath(mPath, mPaint);
 
         // Changes status text
         if (getCanvasViewListener() != null) {
@@ -128,7 +132,7 @@ public class CanvasView extends View {
         if (!(this.from[0] < 0 || this.from[1] < 0)){
             willMove = true;
         }
-        statusString = "From: " + this.from[0] + ", " + this.from[1];
+        //statusString = "From: " + this.from[0] + ", " + this.from[1];
     }
 
 
@@ -143,6 +147,7 @@ public class CanvasView extends View {
         }
     }
 
+    // The clear button
     public void clearCanvas() {
         b = new Board();
         upTouch();
@@ -155,7 +160,7 @@ public class CanvasView extends View {
         mPath.reset();
         invalidate();
         int[] locations = findLocation(mX,mY);
-        statusString += "\n To: " + locations[0] + ", " + locations[1];
+        boolean showTurn = true;
         // This will decide if the piece is allowed to move (non chess piece rules such as
         // is the user telling me to move off the board, is black moving during white turn, etc.)
         if (willMove && !(locations[0] < 0 || locations[1] < 0)){
@@ -166,6 +171,7 @@ public class CanvasView extends View {
                         break;
                     }
             }
+            // detects which piece is allowed to move
             if (b.getTurns() % 2 == 1){
                 if (target.color != Color.BLACK){
                     willMove = false;
@@ -175,24 +181,37 @@ public class CanvasView extends View {
                     willMove = false;
                 }
             }
+            // if the piece can move, detects if it is allowed to move to the certain spot.
             if (willMove){
                 to = new Location(locations[0], locations[1]);
                 b.move(target, new Location(from[0], from[1]), to);
+                if (b.moves.size() > 0){
+                    Piece removed = b.moves.peek().getRemovedPiece();
+                    if (removed != null){
+                        statusString = removed.getType() + " was removed by " + target.getType() + " at " + chessNotationX[to.rank()] + chessNotationY[to.file()] + '\n' + getTurnColor(b.getTurns());
+                        showTurn = false;
+                    }
+                }
                 from = new int[2];
+                if(showTurn){
+                    statusString = getTurnColor(b.getTurns());
+                }
+
             }
         }
         willMove = false;
-        getTurnColor(b.getTurns());
+
     }
 
-    private void getTurnColor(int turns) {
+    // Gets turn color and returns the string displaying what turn it is.
+    private String getTurnColor(int turns) {
         if (turns % 2 == 1)
         {
-            statusString += "        Black's Move";
+            return " Black's Move";
         }
         else
         {
-            statusString += "        White's Move";
+            return " White's Move";
         }
     }
 
@@ -220,6 +239,7 @@ public class CanvasView extends View {
         return true;
     }
 
+    // Gets the location on screen where the user pressed down.
     private int[] findLocation(float x, float y) {
 
         int i1 = -1;
