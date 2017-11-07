@@ -13,17 +13,13 @@ public class Board
 
     private int               turn;
 
-    /**
-     * Creates a new board object.
-     */
+    // Create the board
     public Board()
     {
         addPieces();
     }
 
-    /**
-     * Adds pieces to the board at default locations.
-     */
+    // Add pieces to board
     private void addPieces()
     {
         // 'white' pieces
@@ -96,13 +92,18 @@ public class Board
             target.setLocation(to);
 
             turn++;
-
         }
     }
 
-    /**
-     * Resets the board object and sets pieces to their default locations.
-     */
+    public void moveAndSend(Piece target, Location from, Location to) {
+        boolean valid = isValid(target,to);
+        move(target,from,to);
+        if (valid) {
+            SessionHandler.endTurn(target.getType(),from.rank(),from.file(),to.rank(),to.file());
+        }
+    }
+
+    // Reset the board, return pieces to starting locations
     private void resetBoard()
     {
         pieces = new LinkedList<Piece>();
@@ -114,9 +115,7 @@ public class Board
 
     }
 
-    /**
-     * Called when the undo button is clicked.
-     */
+    // Undo a move
     public Move undoClicked()
     {
         Move move;
@@ -140,10 +139,7 @@ public class Board
         return move;
     }
 
-    /**
-     * Checks to see if the move is valid for a piece.
-     * @return true if the move is valid; false if the move is not valid
-     */
+    // Check if move is valid
     private boolean isValid(Piece piece, Location to)
     {
 
@@ -367,13 +363,7 @@ public class Board
 
     }
 
-    /**
-     * Checks to see if the piece moved should be moved. White pieces always
-     * move first. White pieces move on even turns and black pieces move on odd
-     * turns.
-     * @param piece the piece about to be moved
-     * @return true if the turn is in order; false if the turn is out of order
-     */
+    // Check if the piece is in turn, White moves on even turns, Black on odd
     protected boolean properTurn(Piece piece)
     {
         switch (piece.getType())
@@ -406,20 +396,11 @@ public class Board
         return false;
     }
 
-    /**
-     * Gets the list of pieces that are registered on the board.
-     * @return pieces the list of pieces on the board
-     */
     public LinkedList<Piece> getPieces()
     {
         return pieces;
     }
 
-    /**
-     * Gets the piece at a specific location and returns it if it exists.
-     * @param target the location to be checked
-     * @return the piece in the location if one exists, null otherwise
-     */
     protected Piece getPieceAtLocation(Location target)
     {
         for (Piece piece : pieces)
@@ -432,16 +413,7 @@ public class Board
         return null;
     }
 
-    /**
-     * Helper method that checks the locations between a piece and a target
-     * location that are in the same row for other pieces that would make a move
-     * invalid.
-     * @param piece the piece that is attempting to move
-     * @param to the location the piece is trying to move to
-     * @return true if there are no pieces between this piece and the target
-     *         location; false if there are pieces between this piece and the
-     *         target location
-     */
+    //Check if the rows between this piece and the location are clear
     private boolean checkRowsForObstacles(Piece piece, Location to)
     {
         if (piece.getLocation().rank() == to.rank())
@@ -510,14 +482,7 @@ public class Board
 
 
     // ----------------------------------------------------------
-    /**
-     * Helper method that checks the locations diagonal to a piece and between
-     * it and a target location to see if there are any pieces in the way.
-     * @param piece the piece that wants to move
-     * @param to the location the piece is trying to move to
-     * @return true if there are no pieces between piece and it's target
-     *         location in any diagonal direction; false otherwise
-     */
+    //Check if the diagonals between this piece and the location are clear
     private boolean checkDiagonalsForObstacles(Piece piece, Location to)
     {
         int count = 0;
@@ -573,15 +538,7 @@ public class Board
         }
     }
 
-    /**
-     * Checks a target location to see if there is a piece there of the same
-     * color as a given piece.
-     * @param piece the piece that the piece at a location is compared to
-     * @param target the location that is being checked to see if there is a
-     *        piece there of the same color
-     * @return true if the piece at the location is the same color as the given
-     *         piece; false otherwise
-     */
+    // Checks a target location to see if there is a piece there of the same color as a given piece.
     private boolean compareColorOfPieceAtLocation(Piece piece, Location target)
     {
         return (getPieceAtLocation(target) != null && ((piece.getSymbol() <= (char)0x2659 && getPieceAtLocation(
@@ -590,10 +547,6 @@ public class Board
 
     }
 
-    /**
-     * Gets the turn number, used for rendering purposes.
-     * @return turn the turn number
-     */
     protected int getTurns()
     {
         return turn;

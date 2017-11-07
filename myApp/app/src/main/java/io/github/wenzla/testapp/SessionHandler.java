@@ -9,7 +9,7 @@ import org.json.JSONObject;
 import java.util.Random;
 
 /**
- * Created by Laura on 11/1/2017.
+ * Created by Steven on 11/1/2017.
  */
 
 public class SessionHandler {
@@ -18,14 +18,24 @@ public class SessionHandler {
     private static String id;
     private static boolean idSet = false;
 
+    /*
+     * status of connection
+     * 0: do nothing
+     * 1: waiting for connection
+     * 2: waiting for turn
+     */
+    private static int status = 1;
+
     static Random r = new Random();
 
     private static String TAG = "SessionHandler";
 
     public static void setData(String n, String i) {
         name=n;
-        id=i;
-        idSet = true;
+        if (i!=null) {
+            id = i;
+            idSet = true;
+        }
     }
 
     public static void createSession() {
@@ -93,6 +103,12 @@ public class SessionHandler {
     }
 
     public static void endTurn() {
+        endTurn("",0,0,0,0);
+    }
+
+    public static void endTurn(String type, int from_rank, int from_file, int to_rank, int to_file) {
+        SessionHandler.setStatus(0);
+        String sendData = "piece = '"+type+"', from_rank = "+from_rank+", from_file = "+from_file+", to_rank = "+to_rank+", to_file = "+to_file+"";
         Log.d(TAG,"endTurn");
         if (!isMyTurn()) {
             return;
@@ -105,19 +121,51 @@ public class SessionHandler {
                 String id1 = obj.getString("p1uid");
                 String id2 = obj.getString("p2uid");
                 if (id1.equals(id)) {
-                    DBHandler.send("UPDATE Session SET turn = '"+id2+"' WHERE turn = '"+id+"'");
+                    DBHandler.send("UPDATE Session SET turn = '"+id2+"', "+sendData+" WHERE turn = '"+id+"'");
                 } else {
-                    DBHandler.send("UPDATE Session SET turn = '"+id1+"' WHERE turn = '"+id+"'");
+                    DBHandler.send("UPDATE Session SET turn = '"+id1+"' "+sendData+" WHERE turn = '"+id+"'");
                 }
             }
         } catch (JSONException e) {
             Log.e(TAG, "-",e );
         }
+        SessionHandler.setStatus(2);
+    }
+
+    public static Move getLastMove() {
+        String response = DBHandler.send("SELECT * FROM Session WHERE p1uid = '"+id+"' OR p2uid = '"+id+"'");
+        Move m = null;
+        try {
+            JSONArray r = new JSONArray(response);
+            JSONObject obj = r.getJSONObject(0);
+            String type = obj.getString("piece");
+            int from_rank = obj.getInt("from_rank");
+            int from_file = obj.getInt("from_file");
+            int to_rank = obj.getInt("to_rank");
+            int to_file = obj.getInt("to_file");
+
+            Location from = new Location(from_rank,from_file);
+            Location to = new Location(to_rank,to_file);
+            Piece p = new Piece(type,from,0);
+            m = new Move(p,from,to);
+        } catch (JSONException e) {
+            Log.e(TAG, "-",e );
+        }
+        return m;
     }
 
     public static void endSession() {
         Log.d(TAG,"endSession");
+        setStatus(0);
         DBHandler.send("DELETE FROM WaitingSession WHERE uid = '"+id+"'");
         DBHandler.send("DELETE FROM Session WHERE p1uid = '"+id+"' OR p2uid = '"+id+"'");
+    }
+
+    public static int status() {
+        return status;
+    }
+
+    public static void setStatus(int n) {
+        status = n;
     }
 }

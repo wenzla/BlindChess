@@ -2,6 +2,9 @@ package io.github.wenzla.testapp;
 
 import android.graphics.Paint;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 /**
  * Contains data about a piece.
  */
@@ -12,12 +15,6 @@ public class Piece
     private Paint paint;
     public int color;
 
-    /**
-     * Create a new Piece object.
-     *
-     * @param type the type of the piece
-     * @param location the location of the symbol on the board
-     */
     public Piece(String type, Location location, int color)
     {
         this.type = type;
@@ -28,21 +25,11 @@ public class Piece
         paint.setTextSize(32f);
     }
 
-    /**
-     * Gets the location of the piece on the board.
-     *
-     * @return location the location of the piece on the board
-     */
     public Location getLocation()
     {
         return location;
     }
 
-    /**
-     * Sets the location of the piece on the board.
-     *
-     * @param newLocation the new location of the piece
-     */
     public void setLocation(Location newLocation)
     {
         location = newLocation;
@@ -52,11 +39,7 @@ public class Piece
         return paint;
     }
 
-    /**
-     * Gets the symbol representation of the piece on the board.
-     *
-     * @return symbol the symbol representation of the piece
-     */
+    // The image representing this piece
     public char getSymbol()
     {
         switch (type)
@@ -90,14 +73,26 @@ public class Piece
         return 0;
     }
 
-    /**
-     * Gets the type of the piece.
-     *
-     * @return type the type of the piece
-     */
+    // Type of piece
     public String getType()
     {
         return type;
+
+    }
+
+    public JSONObject toJSON(){
+
+        JSONObject jsonObject= new JSONObject();
+        try {
+            jsonObject.put("type", getType());
+            jsonObject.put("location", getLocation().toJSON());
+            jsonObject.put("color", color);
+
+            return jsonObject;
+        } catch (JSONException e) {
+
+            return null;
+        }
 
     }
 

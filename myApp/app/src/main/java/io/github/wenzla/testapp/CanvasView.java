@@ -35,6 +35,7 @@ public class CanvasView extends View {
     TextView tv = (TextView) findViewById(R.id.status);
     char[] chessNotationX = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'};
     char[] chessNotationY = {'8', '7', '6', '5', '4', '3', '2', '1'};
+    private int myColor = Color.WHITE;
 
     CanvasViewListener canvasViewListener;
 
@@ -105,15 +106,18 @@ public class CanvasView extends View {
         for (Piece piece : b.getPieces())
         {
             String x = piece.getSymbol() + "";
-            if(b.getTurns()%2 == 0){
-                if(piece.color == Color.WHITE){
-                    canvas.drawText(x, ((piece.getLocation().rank() + 1) *100) + 50, ((piece.getLocation().file() + 1)) *100 + 50, piece.getPaint());
-                }
-            } else {
-                if(piece.color == Color.BLACK){
-                    canvas.drawText(x, ((piece.getLocation().rank() + 1) *100) + 50, ((piece.getLocation().file() + 1)) *100 + 50, piece.getPaint());
-                }
+            if (piece.color == myColor) {
+                canvas.drawText(x, ((piece.getLocation().rank() + 1) *100) + 50, ((piece.getLocation().file() + 1)) *100 + 50, piece.getPaint());
             }
+//            if(b.getTurns()%2 == 0){
+//                if(piece.color == Color.WHITE){
+//                    canvas.drawText(x, ((piece.getLocation().rank() + 1) *100) + 50, ((piece.getLocation().file() + 1)) *100 + 50, piece.getPaint());
+//                }
+//            } else {
+//                if(piece.color == Color.BLACK){
+//                    canvas.drawText(x, ((piece.getLocation().rank() + 1) *100) + 50, ((piece.getLocation().file() + 1)) *100 + 50, piece.getPaint());
+//                }
+//            }
         }
 
         // Changes status text
@@ -184,7 +188,7 @@ public class CanvasView extends View {
             // if the piece can move, detects if it is allowed to move to the certain spot.
             if (willMove){
                 to = new Location(locations[0], locations[1]);
-                b.move(target, new Location(from[0], from[1]), to);
+                b.moveAndSend(target, new Location(from[0], from[1]), to);
                 if (b.moves.size() > 0){
                     Piece removed = b.moves.peek().getRemovedPiece();
                     if (removed != null){
@@ -282,5 +286,13 @@ public class CanvasView extends View {
         }
 
         return new int[]{i1,i2};
+    }
+
+    public Board getBoard() {
+        return b;
+    }
+
+    public void setMyColor(int c) {
+        myColor = c;
     }
 }
