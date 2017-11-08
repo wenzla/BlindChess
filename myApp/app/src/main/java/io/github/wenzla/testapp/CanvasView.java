@@ -1,15 +1,19 @@
 package io.github.wenzla.testapp;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
+import android.graphics.Point;
 import android.graphics.Rect;
 import android.graphics.Shader;
 import android.graphics.drawable.BitmapDrawable;
 import android.util.AttributeSet;
+import android.util.DisplayMetrics;
+import android.view.Display;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.TextView;
@@ -26,6 +30,7 @@ public class CanvasView extends View {
     private Paint mPaint;
     private float mX, mY;
     private static final float TOLERANCE = 5;
+    private int tileSize;
     Location to;
     private int[] from = new int[2];
     private Board b = new Board();
@@ -68,6 +73,11 @@ public class CanvasView extends View {
         mPaint.setStrokeJoin(Paint.Join.ROUND);
         mPaint.setStrokeWidth(4f);
 
+        DisplayMetrics metrics = new DisplayMetrics();
+        ((Activity) getContext()).getWindowManager().getDefaultDisplay().getMetrics(metrics);
+
+        tileSize = metrics.widthPixels / 10;
+
         for (int i = 0; i < 8; i++){
             for (int j = 0; j < 8; j++){
                 int color;
@@ -76,7 +86,7 @@ public class CanvasView extends View {
                 } else {
                     color = Color.GRAY;
                 }
-                tiles[i][j] = new Tile(color, 100*(i+1),100*(j+1),200+(100*(i)),200+(100*(j)));
+                tiles[i][j] = new Tile(color, tileSize*(i+1),tileSize*(j+1),(tileSize * 2)+(tileSize*(i)),(tileSize*2)+(tileSize*(j)));
             }
         }
 
@@ -107,7 +117,7 @@ public class CanvasView extends View {
         {
             String x = piece.getSymbol() + "";
             if (piece.color == myColor) {
-                canvas.drawText(x, ((piece.getLocation().rank() + 1) *100) + 50, ((piece.getLocation().file() + 1)) *100 + 50, piece.getPaint());
+                canvas.drawText(x, ((piece.getLocation().rank() + 1) *tileSize) + (tileSize/2), ((piece.getLocation().file() + 1)) *tileSize + (tileSize/2), piece.getPaint());
             }
 //            if(b.getTurns()%2 == 0){
 //                if(piece.color == Color.WHITE){
@@ -192,7 +202,9 @@ public class CanvasView extends View {
                 if (b.moves.size() > 0){
                     Piece removed = b.moves.peek().getRemovedPiece();
                     if (removed != null){
-                        statusString = removed.getType() + " was removed by " + target.getType() + " at " + chessNotationX[to.rank()] + chessNotationY[to.file()] + '\n' + getTurnColor(b.getTurns());
+                        // TODO: its not working
+                        String s =  target.getType();
+                        statusString = removed.getType() + " was removed by " + s + " at " + chessNotationX[to.rank()] + chessNotationY[to.file()] + '\n' + getTurnColor(b.getTurns());
                         showTurn = false;
                     }
                 }
@@ -249,39 +261,39 @@ public class CanvasView extends View {
         int i1 = -1;
         int i2 = -1;
 
-        if(x >100 && x < 200){
+        if(x >tileSize && x < 2*tileSize){
             i1 = 0;
-        } else if(x > 200 && x < 300){
+        } else if(x > 2*tileSize && x < 3*tileSize){
             i1 = 1;
-        } else if(x > 300 && x < 400){
+        } else if(x > 3*tileSize && x < 4*tileSize){
             i1 = 2;
-        } else if(x > 400 && x < 500){
+        } else if(x > 4*tileSize && x < 5*tileSize){
             i1 = 3;
-        } else if(x > 500 && x < 600){
+        } else if(x > 5*tileSize && x < 6*tileSize){
             i1 = 4;
-        } else if(x > 600 && x < 700){
+        } else if(x > 6*tileSize && x < 7*tileSize){
             i1 = 5;
-        } else if(x > 700 && x < 800){
+        } else if(x > 7*tileSize && x <  8*tileSize){
             i1 = 6;
-        } else if(x > 800 && x < 900){
+        } else if(x > 8*tileSize && x < 9*tileSize){
             i1 = 7;
         }
 
-        if(y >100 && y < 200){
+        if(y >tileSize && y < 2*tileSize){
             i2 = 0;
-        } else if(y > 200 && y < 300){
+        } else if(y > 2*tileSize && y < 3*tileSize){
             i2 = 1;
-        } else if(y > 300 && y < 400){
+        } else if(y > 3*tileSize && y < 4*tileSize){
             i2 = 2;
-        } else if(y > 400 && y < 500){
+        } else if(y > 4*tileSize && y < 5*tileSize){
             i2 = 3;
-        } else if(y > 500 && y < 600){
+        } else if(y > 5*tileSize && y < 6*tileSize){
             i2 = 4;
-        } else if(y > 600 && y < 700){
+        } else if(y > 6*tileSize && y < 7*tileSize){
             i2 = 5;
-        } else if(y > 700 && y < 800){
+        } else if(y > 7*tileSize && y < 8*tileSize){
             i2 = 6;
-        } else if(y > 800 && y < 900){
+        } else if(y >  8*tileSize && y < 9*tileSize){
             i2 = 7;
         }
 
