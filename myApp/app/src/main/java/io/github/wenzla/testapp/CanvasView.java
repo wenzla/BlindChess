@@ -165,7 +165,7 @@ public class CanvasView extends View {
     public void clearCanvas() {
         b = new Board();
         upTouch();
-        statusString = "White's Move";
+        //statusString = "White's Move";
     }
 
     // when ACTION_UP stop touch

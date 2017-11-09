@@ -157,7 +157,7 @@ public class LocalCanvasView extends View {
     public void clearCanvas() {
         b = new Board();
         upTouch();
-        statusString = "White's Move";
+        //statusString = "White's Move";
     }
 
     // when ACTION_UP stop touch
@@ -193,21 +193,25 @@ public class LocalCanvasView extends View {
                 b.moveAndSend(target, new Location(from[0], from[1]), to);
                 if (b.moves.size() > 0){
                     Piece removed = b.moves.peek().getRemovedPiece();
-                    if (removed != null){
-                        // TODO: its not working
-                        String s =  target.getType();
-                        if (removed.getType().equals("WHITE_KING") || removed.getType().equals("BLACK_KING")){
-                            statusString = removed.getType() + " was removed from game. The game is over!";
-                            clearCanvas();
-                        } else {
-                            statusString = removed.getType() + " was removed by " + s + " at " + chessNotationX[to.rank()] + chessNotationY[to.file()] + '\n' + getTurnColor(b.getTurns());
+                    if (removed != null ){
+                        if (removed.color != Color.GRAY){
+                            // TODO: its not working
+                            String s =  target.getType();
+                            if (removed.getType().equals("WHITE_KING") || removed.getType().equals("BLACK_KING")){
+                                statusString = removed.getType() + " was removed from game. The game is over!";
+                                clearCanvas();
+                            } else {
+                                statusString = removed.getType() + " was removed by " + s + " at " + chessNotationX[to.rank()] + chessNotationY[to.file()] + '\n' + getTurnColor(b.getTurns());
+                                Move filler = new Move(new Piece("WHITE_PAWN", new Location(7, 6), Color.GRAY), new Location(0,0), new Location(0,0));
+                                b.moves.push(filler);
+                            }
+                            showTurn = false;
                         }
-                        showTurn = false;
                     }
                 }
                 from = new int[2];
                 if(showTurn){
-                    statusString = getTurnColor(b.getTurns());
+                    // statusString = getTurnColor(b.getTurns());
                 }
 
             }
