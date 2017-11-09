@@ -99,8 +99,12 @@ public class Board
 
     public void moveAndSend(Piece target, Location from, Location to) {
         boolean valid = isValid(target,to);
+        Piece piece = getPieceAtLocation(to);
         move(target,from,to);
         if (valid) {
+            if (piece!=null && (piece.getType()=="BLACK_KING" || piece.getType()=="WHITE_KING")) {
+                SessionHandler.recordWin();
+            }
             SessionHandler.endTurn(target.getType(),from.rank(),from.file(),to.rank(),to.file());
         }
     }

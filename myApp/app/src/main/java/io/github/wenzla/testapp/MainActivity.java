@@ -285,11 +285,19 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
                 ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
             }
         }
-
     }
 
     public void setFBName(String name) {
         SessionHandler.setData(name,AccessToken.getCurrentAccessToken().getUserId());
+        int count = SessionHandler.getWins();
+        String wincount = "You have won "+count+" game";
+        if (count!=1) {
+            wincount = wincount+"s";
+        }
+        if (count<0) {
+            wincount = "Log in to save your progress";
+        }
+        ((TextView)findViewById(R.id.r_u_a_scrub)).setText(wincount);
         info = findViewById(R.id.locationString);
         FBName = name;
         String newString = (String)info.getText();

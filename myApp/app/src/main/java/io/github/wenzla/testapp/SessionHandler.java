@@ -38,10 +38,23 @@ public class SessionHandler {
         }
     }
 
+    public static int getWins() {
+        if (idSet) {
+            String response = DBHandler.send("SELECT * FROM Games WHERE WinID = '"+id+"'");
+            try {
+                JSONArray r = new JSONArray(response);
+                return r.length();
+            } catch (JSONException e) {
+                Log.e(TAG, "-",e );
+            }
+        }
+        return -1;
+    }
+
     public static void createSession() {
         Log.d(TAG,"createSession");
         if (!idSet) {
-            id = ""+ r.nextInt(1000);
+            id = ""+ r.nextInt(10000);
         }
         String response = DBHandler.send("SELECT * FROM WaitingSession");
         Log.d(TAG,"createSession: "+response);
@@ -52,13 +65,18 @@ public class SessionHandler {
             if (r.length()>0) {
                 JSONObject obj = r.getJSONObject(0);
                 String otherID = obj.getString("uid");
-                String delete = "DELETE FROM WaitingSession WHERE uid = '"+otherID+"'";
-                Log.d(TAG,delete);
-                DBHandler.send(delete);
-                String insert = "INSERT INTO Session(p1uid, p2uid,turn) VALUES ('"+id+"','"+otherID+"','"+id+"')";
-                Log.d(TAG,insert);
-                DBHandler.send(insert);
-                Log.d(TAG,"session created");
+                if (!otherID.equals(id)) {
+                    String delete = "DELETE FROM WaitingSession WHERE uid = '" + otherID + "'";
+                    Log.d(TAG, delete);
+                    DBHandler.send(delete);
+                    String insert = "INSERT INTO Session(p1uid, p2uid,turn) VALUES ('" + id + "','" + otherID + "','" + id + "')";
+                    Log.d(TAG, insert);
+                    DBHandler.send(insert);
+                    Log.d(TAG, "session created");
+                } else {
+                    DBHandler.send("INSERT INTO WaitingSession(name,uid) VALUES ('"+name+"','"+id+"')");
+                    Log.d(TAG,"wait created");
+                }
             } else {
                 DBHandler.send("INSERT INTO WaitingSession(name,uid) VALUES ('"+name+"','"+id+"')");
                 Log.d(TAG,"wait created");
@@ -130,6 +148,31 @@ public class SessionHandler {
             Log.e(TAG, "-",e );
         }
         SessionHandler.setStatus(2);
+    }
+
+    public static void recordWin() {
+        if (idSet) {
+            Log.d(TAG, "sessionConnect");
+            String response = DBHandler.send("SELECT * FROM Session WHERE p1uid = '" + id + "' OR p2uid = '" + id + "'");
+            Log.d(TAG, "sessionConnect: " + response);
+            try {
+                JSONArray r = new JSONArray(response);
+                if (r.length() > 0) {
+                    JSONObject obj = r.getJSONObject(0);
+                    String id1 = obj.getString("p1uid");
+                    String id2 = obj.getString("p2uid");
+                    if (id1 == id) {
+                        DBHandler.send("INSERT INTO Game(WinID,LoseID) VALUES('" + id1 + "','" + id2 + "')");
+                    } else {
+                        DBHandler.send("INSERT INTO Game(WinID,LoseID) VALUES('" + id2 + "','" + id1 + "')");
+                    }
+
+                } else {
+                }
+            } catch (JSONException e) {
+                Log.e(TAG, "-", e);
+            }
+        }
     }
 
     public static Move getLastMove() {
