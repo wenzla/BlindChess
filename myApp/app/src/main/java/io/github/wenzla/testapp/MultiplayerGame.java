@@ -1,5 +1,6 @@
 package io.github.wenzla.testapp;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
@@ -108,6 +109,10 @@ public class MultiplayerGame extends AppCompatActivity {
 
     public void clearCanvas(View v){
         cv.clearCanvas();
+    }
+
+    public void backClick(View v) {
+        startActivity(new Intent(MultiplayerGame.this, MainActivity.class));
     }
 
 }
