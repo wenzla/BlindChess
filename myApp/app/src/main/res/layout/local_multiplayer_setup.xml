@@ -7,7 +7,7 @@
     android:background="#FFFFFF"
     android:orientation="vertical">
 
-    <io.github.wenzla.testapp.CanvasView
+    <io.github.wenzla.testapp.LocalCanvasView
         android:id="@+id/signature_canvas"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

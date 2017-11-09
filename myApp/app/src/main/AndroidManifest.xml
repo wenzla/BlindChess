@@ -44,6 +44,7 @@
         </activity>
         <activity android:name=".MultiplayerGame" />
         <activity android:name=".SessionActivity"></activity>
+        <activity android:name=".LocalMultiplayerGame" />
     </application>
 
 </manifest>

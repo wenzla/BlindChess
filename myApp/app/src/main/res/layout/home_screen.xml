@@ -44,26 +44,15 @@
 
     <Button
         android:id="@+id/session_test_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Test"
-        android:onClick="sessionTest"
-        app:layout_constraintTop_toBottomOf="@id/horizontal_center_guideline"
-        app:layout_constraintStart_toStartOf="@id/string_guideline"
-        />
-
-    <ImageButton
-        android:id="@+id/GameSetupButton"
-        android:layout_width="173dp"
-        android:layout_height="69dp"
-        android:layout_marginBottom="8dp"
+        android:layout_width="155dp"
+        android:layout_height="46dp"
+        android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:background="@android:color/darker_gray"
-        android:onClick="SetupClick"
-        app:layout_constraintBottom_toTopOf="@+id/horizontal_button_top_guideline"
+        android:onClick="sessionTest"
+        android:text="Online Play"
         app:layout_constraintEnd_toStartOf="@+id/fb_guideline"
         app:layout_constraintStart_toStartOf="@+id/string_guideline"
-        app:srcCompat="@android:drawable/ic_media_play" />
+        app:layout_constraintTop_toBottomOf="@id/horizontal_center_guideline" />
 
     <com.facebook.login.widget.LoginButton
         android:id="@+id/login_button"
@@ -82,9 +71,23 @@
         android:id="@+id/locationString"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
-        android:layout_marginStart="16dp"
+        android:layout_marginEnd="8dp"
         android:text="@string/WelcomeMessage"
         app:layout_constraintBottom_toTopOf="@+id/horizontal_text_top_guideline"
+        app:layout_constraintEnd_toStartOf="@+id/fb_guideline"
+        app:layout_constraintStart_toStartOf="@+id/string_guideline" />
+
+    <Button
+        android:id="@+id/GameSetupButton"
+        android:layout_width="155dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:onClick="SetupClick"
+        android:text="Local Play"
+        app:layout_constraintBottom_toTopOf="@+id/horizontal_button_top_guideline"
+        app:layout_constraintEnd_toStartOf="@+id/fb_guideline"
         app:layout_constraintStart_toStartOf="@+id/string_guideline" />
 
 </android.support.constraint.ConstraintLayout>

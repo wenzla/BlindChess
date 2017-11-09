@@ -148,16 +148,14 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
             ).executeAsync();
         }
 
-
-
     }
 
     public void SetupClick(View v) {
-        startActivity(new Intent(MainActivity.this, MultiplayerGame.class));
+        startActivity(new Intent(MainActivity.this, LocalMultiplayerGame.class));
     }
 
     public void sessionTest(View v) {
-        startActivity(new Intent(MainActivity.this, SessionActivity.class));
+        startActivity(new Intent(MainActivity.this, MultiplayerGame.class));
     }
 
     @Override

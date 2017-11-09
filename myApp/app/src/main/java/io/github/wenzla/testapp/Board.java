@@ -67,10 +67,11 @@ public class Board
             Piece piece = getPieceAtLocation(to);
 
             // there is a piece that needs to be removed from the board
-            if (piece != null)
-            {
+            if (piece != null) {
                 moves.push(new Move(target, from, to, piece));
-
+                getPieces().remove(piece);
+            }
+/*
                 if (piece.getType() == "BLACK_KING")
                 {
                     resetBoard();
@@ -82,10 +83,11 @@ public class Board
                     resetBoard();
                     return;
                 }
-                getPieces().remove(piece);
-            }
+
+            }*/
             else
             {
+
                 moves.push(new Move(target, from, to));
             }
 
