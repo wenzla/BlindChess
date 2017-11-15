@@ -1,5 +1,7 @@
 package io.github.wenzla.testapp;
 
+import android.graphics.Color;
+
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -9,9 +11,12 @@ import static org.junit.Assert.*;
  *
  * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
  */
-public class ExampleUnitTest {
+public class LocationTest {
     @Test
-    public void addition_isCorrect() throws Exception {
-        assertEquals(4, 2 + 2);
+    public void locationTest() throws Exception {
+        Location test = new Location(0, 6);
+        assertEquals(0, test.rank());
+        assertEquals(6, test.file());
+
     }
 }

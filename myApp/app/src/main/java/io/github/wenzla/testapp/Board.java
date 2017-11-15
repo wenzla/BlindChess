@@ -146,7 +146,7 @@ public class Board
     }
 
     // Check if move is valid
-    private boolean isValid(Piece piece, Location to)
+    boolean isValid(Piece piece, Location to)
     {
 
         if (piece.getSymbol() == (char)0x2654) // If White King...
