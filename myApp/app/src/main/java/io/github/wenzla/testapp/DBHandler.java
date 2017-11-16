@@ -1,5 +1,7 @@
 package io.github.wenzla.testapp;
 
+import android.util.Log;
+
 /**
  * Created by Steven on 10/24/2017.
  */
@@ -16,6 +18,7 @@ public class DBHandler {
     }
     public static boolean ping() {
         String result = send("SELECT * FROM Session");
+        Log.d("DBHandler",result);
         return !(result.equals("failed connection") || result.equals("failed execution"));
     }
 }
