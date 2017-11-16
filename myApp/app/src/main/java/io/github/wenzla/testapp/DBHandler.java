@@ -1,7 +1,7 @@
 package io.github.wenzla.testapp;
 
 /**
- * Created by Laura on 10/24/2017.
+ * Created by Steven on 10/24/2017.
  */
 
 public class DBHandler {
@@ -13,5 +13,9 @@ public class DBHandler {
         } catch (Exception e) {
             return "failed execution";
         }
+    }
+    public static boolean ping() {
+        String result = send("SELECT * FROM Session");
+        return !(result.equals("failed connection") || result.equals("failed execution"));
     }
 }

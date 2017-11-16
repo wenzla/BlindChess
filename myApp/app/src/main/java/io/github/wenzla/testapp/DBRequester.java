@@ -12,7 +12,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 /**
- * Created by Laura on 10/24/2017.
+ * Created by Steven on 10/24/2017.
  */
 
 public class DBRequester extends AsyncTask<String, String, String> {
@@ -30,6 +30,9 @@ public class DBRequester extends AsyncTask<String, String, String> {
         try {
             url = new URL(urlString);
             urlConnection = (HttpURLConnection) url.openConnection();
+            if (urlConnection.getResponseCode()!=200) {
+                return "failed connection";
+            }
             urlConnection.setRequestMethod("POST");
             out = new BufferedOutputStream(urlConnection.getOutputStream());
             BufferedWriter writer = new BufferedWriter (new OutputStreamWriter(out, "UTF-8"));

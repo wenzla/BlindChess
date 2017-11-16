@@ -4,8 +4,10 @@ import android.Manifest;
 import android.animation.LayoutTransition;
 import android.app.Activity;
 import android.app.ActivityOptions;
+import android.app.AlertDialog;
 import android.app.Fragment;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Address;
@@ -14,6 +16,8 @@ import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
@@ -155,7 +159,20 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
     }
 
     public void sessionTest(View v) {
-        startActivity(new Intent(MainActivity.this, MultiplayerGame.class));
+        if (DBHandler.ping()) {
+            startActivity(new Intent(MainActivity.this, MultiplayerGame.class));
+        } else {
+            AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
+            builder.setMessage("Unable to connect");
+            builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    dialogInterface.cancel();
+                }
+            });
+            AlertDialog alert = builder.create();
+            alert.show();
+        }
     }
 
     @Override
