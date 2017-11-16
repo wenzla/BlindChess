@@ -9,12 +9,12 @@ import java.util.LinkedList;
 public class Board
 {
     private LinkedList<Piece> pieces = new LinkedList<Piece>();
-    public Stack<Move>       moves  = new Stack<Move>();
+    Stack<Move>       moves  = new Stack<Move>();
 
     private int               turn;
 
     // Create the board
-    public Board()
+    Board()
     {
         addPieces();
     }
@@ -59,7 +59,7 @@ public class Board
         pieces.add(new Piece("BLACK_PAWN", new Location(7, 1), Color.BLACK));
     }
 
-    public void move(Piece target, Location from, Location to)
+    void move(Piece target, Location from, Location to)
     {
 
         if (isValid(target, to))
@@ -110,7 +110,7 @@ public class Board
     }
 
     // Reset the board, return pieces to starting locations
-    private void resetBoard()
+    void resetBoard()
     {
         pieces = new LinkedList<Piece>();
         moves = new Stack<Move>();
@@ -146,7 +146,7 @@ public class Board
     }
 
     // Check if move is valid
-    boolean isValid(Piece piece, Location to)
+    private boolean isValid(Piece piece, Location to)
     {
 
         if (piece.getSymbol() == (char)0x2654) // If White King...

@@ -164,6 +164,7 @@ public class CanvasView extends View {
     // The clear button
     public void clearCanvas() {
         b = new Board();
+        b.resetBoard();
         upTouch();
         //statusString = "White's Move";
     }

@@ -42,9 +42,15 @@
                 <data android:scheme="@string/fb_login_protocol_scheme" />
             </intent-filter>
         </activity>
-        <activity android:name=".MultiplayerGame" />
-        <activity android:name=".SessionActivity"></activity>
-        <activity android:name=".LocalMultiplayerGame" />
+        <activity
+            android:name=".MultiplayerGame"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity android:name=".SessionActivity"/>
+        <activity
+            android:name=".LocalMultiplayerGame"
+            android:screenOrientation="portrait" >
+        </activity>
     </application>
 
 </manifest>
