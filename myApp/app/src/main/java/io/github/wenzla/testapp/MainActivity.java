@@ -305,8 +305,8 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
     }
 
     public void setFBName(String name) {
-        SessionHandler.setData(name,AccessToken.getCurrentAccessToken().getUserId());
-        int count = SessionHandler.getWins();
+        //SessionHandler.setData(name,AccessToken.getCurrentAccessToken().getUserId());
+        int count = 0; //SessionHandler.getWins();
         String wincount = "You have won "+count+" game";
         if (count!=1) {
             wincount = wincount+"s";
