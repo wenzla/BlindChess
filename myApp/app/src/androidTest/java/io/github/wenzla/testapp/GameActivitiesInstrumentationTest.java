@@ -15,20 +15,15 @@ import static junit.framework.Assert.assertTrue;
 public class GameActivitiesInstrumentationTest {
 
     @Rule
-    public ActivityTestRule<MainActivity> mActivityTestRule =
-            new ActivityTestRule<>(MainActivity.class);
+    public ActivityTestRule<LocalMultiplayerGame> mActivityTestRule =
+            new ActivityTestRule<>(LocalMultiplayerGame.class);
 
 
     @Test
     public void GameActivityTextLocationTest() {
-        onView(withId(R.id.signature_canvas)).check(isCompletelyBelow(withId(R.id.status)));
-        onView(withId(R.id.signature_canvas)).check(isCompletelyAbove(withId(R.id.resetBoard)));
+        onView(withId(R.id.resetBoard)).check(isCompletelyBelow(withId(R.id.status)));
+        onView(withId(R.id.status)).check(isCompletelyAbove(withId(R.id.button2)));
         onView(withId(R.id.button2)).check(isCompletelyLeftOf(withId(R.id.resetBoard)));
-    }
-
-    @Test
-    public void GameActivityTextContentTest() {
-        assertTrue(true);
     }
 
 

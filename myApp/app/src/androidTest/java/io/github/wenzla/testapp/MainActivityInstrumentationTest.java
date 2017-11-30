@@ -15,6 +15,8 @@ import static android.support.test.espresso.assertion.PositionAssertions.isAbove
 import static android.support.test.espresso.assertion.PositionAssertions.isBelow;
 import static android.support.test.espresso.assertion.PositionAssertions.isCompletelyAbove;
 import static android.support.test.espresso.assertion.PositionAssertions.isCompletelyBelow;
+import static android.support.test.espresso.assertion.PositionAssertions.isLeftAlignedWith;
+import static android.support.test.espresso.assertion.PositionAssertions.isRightAlignedWith;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
@@ -32,13 +34,8 @@ public class MainActivityInstrumentationTest {
     @Test
     public void MainActivityTextLocationTest() {
         onView(withId(R.id.r_u_a_scrub)).check(isCompletelyBelow(withId(R.id.locationString)));
-        onView(withId(R.id.session_test_button)).check(isCompletelyAbove (withId(R.id.GameSetupButton)));
-        onView(withId(R.id.login_button)).check(isCompletelyBelow(withId(R.id.session_test_button)));
-    }
-
-    @Test
-    public void MainActivityTextContentTest() {
-        assertTrue(true);
+        onView(withId(R.id.login_button)).check(isCompletelyAbove(withId(R.id.GameSetupButton)));
+        onView(withId(R.id.login_button)).check(isCompletelyAbove(withId(R.id.session_test_button)));
     }
 
 
